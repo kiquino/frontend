@@ -9,6 +9,7 @@ import personal from './pages/personal'
 import domicilio from './pages/domicilio'
 import login from './pages/login'
 import registro from './pages/registro'
+import Profilehome from "./pages/profilehome";
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
   }/>
    <Route path="/registro" exact component ={
     registro
+  }/>
+  <Route path="/profilehome" exact component ={
+    Profilehome
   }/>
 </Switch>
 </Router>

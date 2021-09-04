@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-const Nav = (props) => {
+const Nav = ({data,nombre}) => {
     const [isActive, setActive] = useState(false);
+    const [name,setName]=useState(nombre);
     
 
-return(<nav className="navbar has-background-primary" role="navigation">
+return(
+
+<nav className="navbar has-background-primary" role="navigation">
     <div className="navbar-brand">
         <div role="button" onClick={()=>{setActive(!isActive)}} className={`navbar-burger has-text-white ${isActive ? "is-active":""}`}  aria-label="menu" aria-expanded="false">
         <span aria-hidden="true"></span>
@@ -19,10 +22,16 @@ return(<nav className="navbar has-background-primary" role="navigation">
             <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/domicilio">Domicilio</NavLink>
         </div>
 
-        <div className="navbar-end">
-        <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/login">Login</NavLink>
-            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/registro">Registro</NavLink>
-        </div>
+       
+            {data ? 
+                 <div className="navbar-end">
+                <p>Bienvenido,{name}</p>
+            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/salir">Salir</NavLink></div> : <div className="navbar-end">
+             <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/login">Login</NavLink>
+            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/registro">Registro</NavLink></div>}
+
+
+        
 
     </div>
 </nav>);

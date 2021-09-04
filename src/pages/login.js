@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Redirect } from "react-router-dom";
 import Axios from 'axios';
 import Cookies from 'js-cookies';
+import Nav from '../components/layout/nav';
 
 
 
@@ -12,6 +13,7 @@ const Login = (props)=>{
 
     const [dni,setDni] = useState("");
     const [password,setPassword] =useState("");
+    const [nombre,setNombre] = useState("");
 
     const [logged,setLogged] = useState(false);
 
@@ -22,6 +24,7 @@ const Login = (props)=>{
         }).then((response)=>{
             Cookies.setItem("token",response.data.token);
             Cookies.setItem("id_inquilino",response.data.result.id);
+            setNombre(response.data.result.nombre);
             setLogged(true);
         })
         
@@ -37,8 +40,10 @@ const Login = (props)=>{
             pathname: "/profilehome",
            
             state: {logueado:logged}
-          }}/>
-          }
+          }}/> 
+         
+        }
+          
 
         <div className="column is-full column is-half is-offset-one-quarter">
            
