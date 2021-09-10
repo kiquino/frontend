@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-const Nav = ({data,nombre}) => {
+import Cookies from 'js-cookies';
+import axios from "axios";
+
+const Nav = () => {
     const [isActive, setActive] = useState(false);
-    const [name,setName]=useState(nombre);
+    const[nombre,setNombre]=useState("");
+    
+    const [islogged, setlogged] = useState(Boolean(Cookies.getItem("id_inquilino"))?true:false)
+    
+   
+     
     
 
 return(
@@ -23,9 +31,10 @@ return(
         </div>
 
        
-            {data ? 
+            {islogged ? 
                  <div className="navbar-end">
-                <p>Bienvenido,{name}</p>
+                     
+              <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/profilehome"><p>Bienvenido</p></NavLink>  
             <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/salir">Salir</NavLink></div> : <div className="navbar-end">
              <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/login">Login</NavLink>
             <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/registro">Registro</NavLink></div>}

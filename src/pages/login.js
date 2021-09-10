@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Redirect } from "react-router-dom";
 import Axios from 'axios';
 import Cookies from 'js-cookies';
-import Nav from '../components/layout/nav';
+
 
 
 
@@ -14,18 +14,29 @@ const Login = (props)=>{
     const [dni,setDni] = useState("");
     const [password,setPassword] =useState("");
     const [nombre,setNombre] = useState("");
+    const [logged,setLogged] =useState(false);
+    const [error,setError]=useState(false);
+    const [mensaje,setMensaje] = useState("");
 
-    const [logged,setLogged] = useState(false);
 
     const login =()=>{
         Axios.post("http://localhost:3000/admin/autenticacion",{
             dni: dni,
             password:password
         }).then((response)=>{
-            Cookies.setItem("token",response.data.token);
+            if(response.data.auth){
+                Cookies.setItem("token",response.data.token);
             Cookies.setItem("id_inquilino",response.data.result.id);
             setNombre(response.data.result.nombre);
-            setLogged(true);
+            setLogged(response.data.auth);
+            setError(false);
+            setMensaje(response.data.mensajeError);
+            }else{
+                setError(true);
+                
+                setMensaje(response.data.mensajeError);
+            }
+            
         })
         
     }
@@ -35,12 +46,10 @@ const Login = (props)=>{
     return(
     
     <div className=" columns">
-        {logged &&
+        {logged ?
         <Redirect to={{
-            pathname: "/profilehome",
-           
-            state: {logueado:logged}
-          }}/> 
+            pathname: "/profilehome"
+          }}/> : ""
          
         }
           
@@ -83,7 +92,7 @@ const Login = (props)=>{
                        
                     </div>
                 </div> 
-               
+               {error ?  <div className="notification is-danger" role="alert">{mensaje}</div> : <div className="notification is-primary" role="alert">{mensaje}</div>}
             
         </div>
     </div>)
