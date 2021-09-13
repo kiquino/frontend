@@ -8,10 +8,11 @@ const AgregarCompra = ()=>{
     const [errorAxios,SetError] = useState("");
     const [auth, setAuth] =useState(false);
     const [categoria,setCategoria] =useState("");
-    const registrarCompra=async()=>{
+    
+    const registrarCompra = async()=>{
 
         
-        await axios.post("http://localhost:3000/admin/registro/compra",{
+        await axios.post("http://localhost:3000/admin/compra",{
             id:Cookies.getItem("id_inquilino"),
             categoria:categoria,
             valor:gasto
