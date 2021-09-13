@@ -1,24 +1,46 @@
 import { useState } from "react";
 import Cookies from 'js-cookies';
 import axios from "axios";
+import { Redirect } from "react-router";
 
 const AgregarCompra = ()=>{
     const [gasto,setGasto]=useState("");
     const [errorAxios,SetError] = useState("");
     const [auth, setAuth] =useState(false);
-
+    const [categoria,setCategoria] =useState("");
     const registrarCompra=async()=>{
 
-        await axios("http://localhost:3000/admin/registro/compra",{
+        
+        await axios.post("http://localhost:3000/admin/registro/compra",{
+            id:Cookies.getItem("id_inquilino"),
+            categoria:categoria,
+            valor:gasto
             
+        }).then((response)=>{
+            
+            console.log(response.data)
+        }).catch((response)=>{
+            console.log(response);
         })
     }
     const checkAuth=()=>{
-        if(Cookies.getItem("token")){
-            
-        }
+        axios.post("https://localhost:3000/admin/autenticacion/validar",{
+            headers:{
+                "x-access-token": Cookies.getItem("token")
+            }
+        }).then((response)=>{
+           setAuth(true)
+        }).catch((response)=>{
+            console.error(response)
+        })
     }
+    if (auth) {
+        checkAuth();
+    }
+    
+
     return(<div >
+    
         <div className="is-size-1 has-text-centered">
             <h1 clas>Agregar Compra</h1>
     <div className="columns">
@@ -40,7 +62,9 @@ const AgregarCompra = ()=>{
            <div className="field">
                <div className="control has-icons-left has-text-left">
                <div className="select">
-  <select>
+  <select onChange={(e)=>{
+      setCategoria(e.target.value)
+  }}>
     <option>Elija una categoria</option>
     <option value="mercado">mercado</option>
     <option value="verduleria">verduleria</option>
@@ -48,6 +72,11 @@ const AgregarCompra = ()=>{
     <option value="personal">personal</option>
   </select>
 </div>
+               </div>
+           </div>
+           <div className="field">
+               <div className="control">
+               <button type="button" className="button is-info" onClick={registrarCompra}>Entrar</button>
                </div>
            </div>
         </div>
