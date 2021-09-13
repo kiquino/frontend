@@ -1,5 +1,5 @@
 import axios from "axios";
-import {react, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 
@@ -15,7 +15,7 @@ const [isAdmin, setAdmin]=useState("0");
 const [email,SetEmail]=useState("");
 
 const [mensaje,setMensaje]=useState("");
-const [isMessage,setIsmessage]=useState(false);
+
 const [error,setError]=useState(false);
 const registrarse=()=>{
     // console.log(nombre,apellido,dni,password,calle,altura,email);
@@ -29,7 +29,7 @@ const registrarse=()=>{
         admin:isAdmin,
         email:email
     }).then((response)=>{
-        setIsmessage(true);
+     
         setMensaje(response.data.mensaje);
         setError(response.data.error);
 

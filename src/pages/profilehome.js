@@ -1,4 +1,4 @@
-import {   useState } from "react";
+import {useEffect,   useState } from "react";
 
 import axios from 'axios';
 import Cookies from 'js-cookies';
@@ -19,6 +19,7 @@ const Profilehome =() =>{
   const [gastos,setgastos]=useState(false);
   const [errorAxios,SetError] = useState("");
 
+ useEffect(()=>{
   const builder = async ()=>{
     
     await axios.get("http://localhost:3000/admin/profilebuilder",{
@@ -33,15 +34,15 @@ const Profilehome =() =>{
       setDatos_domicilio(response.data.result_domicilio);
       setDatos_integrantes(response.data.result_integrante);
       setDatos_gastos(response.data.result_gastos);
+      setgastos(response.data.haygastos);
       setAuth(response.data.auth);
       if (response.data.result.admin === 1) {
         setAdmin(true);
       }
-    }).then(()=>{
+    
+    }).then((response)=>{
       setFetch(true);
-     if(datos_gastos.length >0){
-       setgastos(true);
-     }
+     
       
     }).catch((error)=>{
       SetError("Error de ingreso, vuelva a loguearse.");
@@ -51,6 +52,8 @@ const Profilehome =() =>{
     builder();
   }
 
+ },[])
+ 
 
    
     
@@ -106,9 +109,27 @@ is-offset-one-fifth my-5">
           <p className="title">Gastos</p>
           
             {gastos ?
-             <ul>
-               {datos_gastos.map(item => <li>{item.gasto}</li>)}
-            </ul> 
+             <table className="table">
+               <thead>
+                 <tr>
+                   <th title="categoria">Categoria</th>
+                   <th title="valor">Valor</th>
+                   <th title="fecha">Fecha</th>
+                 </tr>
+               </thead>
+               <tbody>
+               {datos_gastos.map(item => <tr>
+                <td>{item.categoria}</td>
+                <td>${item.gasto}</td>
+                <td>{item.fecha}</td>
+                <td>
+                  <a href={`admin/modificarItem:${item.id}`}>edit</a></td>
+                <td><a href={`admin/eliminarItem:${item.id}`}>eliminar</a></td>
+               </tr>)}     
+               </tbody>
+             </table>
+              
+             
             : <div className="notification is-success is-light is-text-centered"><p>No posee Gastos</p></div>
            }
            

@@ -2,12 +2,15 @@ import { useState } from "react";
 import Cookies from 'js-cookies';
 import axios from "axios";
 import { Redirect } from "react-router";
+import { useEffect } from "react";
 
 const AgregarCompra = ()=>{
     const [gasto,setGasto]=useState("");
     const [errorAxios,SetError] = useState("");
     const [auth, setAuth] =useState(false);
     const [categoria,setCategoria] =useState("");
+    const [error,setError]=useState(false);
+    const[mensaje,setMensaje]=useState("");
     
     const registrarCompra = async()=>{
 
@@ -19,25 +22,29 @@ const AgregarCompra = ()=>{
             
         }).then((response)=>{
             
-            console.log(response.data)
+            setMensaje(response.data.mensaje)
         }).catch((response)=>{
-            console.log(response);
+            setError(true);
+            setMensaje(response.data.mensaje)
         })
     }
-    const checkAuth=()=>{
-        axios.post("https://localhost:3000/admin/autenticacion/validar",{
-            headers:{
-                "x-access-token": Cookies.getItem("token")
-            }
-        }).then((response)=>{
-           setAuth(true)
-        }).catch((response)=>{
-            console.error(response)
-        })
-    }
-    if (auth) {
-        checkAuth();
-    }
+    useEffect(()=>{
+        const checkAuth=()=>{
+            axios.post("https://localhost:3000/admin/autenticacion/validar",{
+                headers:{
+                    "x-access-token": Cookies.getItem("token")
+                }
+            }).then(()=>{
+
+               setAuth(true)
+            }).catch((response)=>{
+                console.error(response)
+            })
+        }
+        if (auth) {
+            checkAuth();
+        }
+    },[0])
     
 
     return(<div >
@@ -76,10 +83,14 @@ const AgregarCompra = ()=>{
                </div>
            </div>
            <div className="field">
-               <div className="control">
-               <button type="button" className="button is-info" onClick={registrarCompra}>Entrar</button>
+               <div className="control has-text-left">
+               <button type="button" className="button is-info" onClick={registrarCompra}>Agregar Compra</button>
                </div>
            </div>
+           <div className="field">
+                          
+                          {error ? <div className="notification is-danger"><p>{mensaje}</p></div>:<div className="notification is-success"><p>{mensaje}</p></div>}  
+                         </div>
         </div>
     </div>
         </div>

@@ -16,10 +16,11 @@ const RegistroHogar =()=>{
             altura:altura,
             alquiler:alquiler
         }).then((response)=>{
-            
+            setError(response.data.error)
             setMensaje(response.data.mensaje)
         }).catch((response)=>{
-            
+            setMensaje(response);
+            setError(true);
         })
     }
 

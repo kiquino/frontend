@@ -8,7 +8,7 @@ Cookies.removeItem("token");
                 <div className="column is-half has-text-centered">
                     <div className="title"><p>Nos vemos luego</p></div>
                     <div>
-                        <img src="adios.png"></img>
+                        <img src="adios.png" alt=""></img>
                     </div>
                 </div>
             </div>

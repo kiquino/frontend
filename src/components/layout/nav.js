@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Cookies from 'js-cookies';
-import axios from "axios";
+
+
 
 const Nav = () => {
     const [isActive, setActive] = useState(false);
-    const[nombre,setNombre]=useState("");
+
     
     const [islogged, setlogged] = useState(Boolean(Cookies.getItem("id_inquilino"))?true:false)
-    
+  
    
      
     
