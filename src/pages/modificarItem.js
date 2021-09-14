@@ -1,62 +1,45 @@
 import axios from "axios";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 
-const ModificarServicio = ()=>{
+const ModificarCompra =()=>{
+
+    const [gasto,setGasto]=useState("");
+    const [categoria,setCategoria]=useState("");
     const [error,setError]=useState(false);
     const [mensaje,setMensaje]=useState("");
-    const [nombre,setNombre] = useState("");
-    const [gasto,setGasto]=useState("");
-    const {id} = useParams();
+    const {id}= useParams();
+
     const Actualizar = async()=>{
         
-        await axios.post(`http://localhost:3000/admin/profilebuilder/actualizarServicio/${id}`,{
-            gasto:gasto,
-            nombre:nombre
-        }).then((response)=>{
-            setMensaje(response.data.mensaje);
-            setError(response.data.error)
-        })
-        }
-
-    
+    await axios.post(`http://localhost:3000/admin/compra/actualizar/${id}`,{
+        gasto:gasto,
+        categoria:categoria
+    }).then((response)=>{
+        setMensaje(response.data.mensaje)
+    })
+    }
     useEffect(()=>{
         const rellenarEspacios= async ()=>{
-            await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`)
+            await axios.get(`http://localhost:3000/admin/compra/modificar/${id}`)
             .then((response)=>{
-                setNombre(response.data.nombre);
+                setCategoria(response.data.categoria);
                 setGasto(response.data.gasto);
-   
-            }).catch((error)=>{
-                console.log(error)
             })
 
         }
 rellenarEspacios();
-    },[0])
+    },[])
+    
+
     return(<div >
     
         <div className="is-size-1 has-text-centered">
-            <h1 clas>Modificar Servicio</h1>
+            <h1 clas>Modificar Compra</h1>
     <div className="columns">
     <div className="column is-three-fifths is-offset-one-fifth">
-    <div className="field">
-               <div className="control has-icons-left has-text-left">
-                   <label className="label">Nombre</label>
-                   <input type="text"
-                   className="input"
-                   id="nombre"
-                   name="nombre"
-                   value={nombre}
-                   onChange={(e)=>{
-                       setNombre(e.target.value);
-                   }}
-                   placeholder={nombre}/>
-                   <span className="icon is-small is-left"></span>
-               </div>
-           </div>
             <div className="field">
                <div className="control has-icons-left has-text-left">
                    <label className="label">Gasto</label>
@@ -72,10 +55,24 @@ rellenarEspacios();
                    <span className="icon is-small is-left"></span>
                </div>
            </div>
-           
+           <div className="field">
+               <div className="control has-icons-left has-text-left">
+               <div className="select">
+  <select onChange={(e)=>{
+      setCategoria(e.target.value)
+  }}>
+    <option value={categoria}>{categoria}</option>
+    <option value="mercado">mercado</option>
+    <option value="verduleria">verduleria</option>
+    <option value="carniceria">carniceria</option>
+    <option value="personal">personal</option>
+  </select>
+</div>
+               </div>
+           </div>
            <div className="field">
                <div className="control has-text-left">
-               <button type="button" className="button is-info" onClick={Actualizar}>Modificar Servicio</button>
+               <button type="button" className="button is-info" onClick={Actualizar}>Modificar Compra</button>
                </div>
                <div className="control has-text-right">
                <NavLink exact to="/profilehome" type="button" className="button is-info" >volver</NavLink>
@@ -90,4 +87,4 @@ rellenarEspacios();
         </div>
     </div>)
 }
-export default ModificarServicio;
+export default ModificarCompra;

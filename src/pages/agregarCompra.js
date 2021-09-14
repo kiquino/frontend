@@ -3,6 +3,7 @@ import Cookies from 'js-cookies';
 import axios from "axios";
 import { Redirect } from "react-router";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 const AgregarCompra = ()=>{
     const [gasto,setGasto]=useState("");
@@ -85,6 +86,9 @@ const AgregarCompra = ()=>{
            <div className="field">
                <div className="control has-text-left">
                <button type="button" className="button is-info" onClick={registrarCompra}>Agregar Compra</button>
+               </div>
+               <div className="control has-text-right">
+               <NavLink type="button" className="button is-info" exact to="/profilehome">volver</NavLink>
                </div>
            </div>
            <div className="field">

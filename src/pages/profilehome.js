@@ -18,6 +18,8 @@ const Profilehome =() =>{
   const [datos_gastos,setDatos_gastos]=useState([]);
   const [gastos,setgastos]=useState(false);
   const [errorAxios,SetError] = useState("");
+  const [servicios,setServicios]=useState(false);
+  const [listServicios,setListaServicios]=useState([]);
 
  useEffect(()=>{
   const builder = async ()=>{
@@ -35,6 +37,8 @@ const Profilehome =() =>{
       setDatos_integrantes(response.data.result_integrante);
       setDatos_gastos(response.data.result_gastos);
       setgastos(response.data.haygastos);
+      setServicios(response.data.hayservicios);
+      setListaServicios(response.data.result_servicios)
       setAuth(response.data.auth);
       if (response.data.result.admin === 1) {
         setAdmin(true);
@@ -45,7 +49,7 @@ const Profilehome =() =>{
      
       
     }).catch((error)=>{
-      SetError("Error de ingreso, vuelva a loguearse.");
+      SetError("Error de ingreso, vuelva a loguearse."+error);
     })
   }
   if (!fetch) {
@@ -80,9 +84,9 @@ is-offset-one-fifth my-5">
       <article className="tile is-child notification is-info column ">
           <p className="title">Perfil</p>
           <ul>
-           <li className="subtitle">Nombre: {datos_perfil.nombre}</li>
-           <li className="subtitle">Apellido: {datos_perfil.apellido}</li>
-           <li className="subtitle">email: {datos_perfil.email}</li>
+           <li key="p1" className="subtitle">Nombre: {datos_perfil.nombre}</li>
+           <li key="p2" className="subtitle">Apellido: {datos_perfil.apellido}</li>
+           <li key="p3" className="subtitle">email: {datos_perfil.email}</li>
            
 
           </ul>
@@ -93,10 +97,10 @@ is-offset-one-fifth my-5">
       <article className="tile is-child notification is-info column ">
           <p className="title">Domicilio</p>
           <ul>
-           <li className="subtitle">Dirección: {datos_domicilio.calle}</li>
-           <li className="subtitle">Altura: {datos_domicilio.altura}</li>
-           <li className="subtitle">Alquiler: {datos_domicilio.alquiler}</li>
-           <li className="subtitle">integrantes: <ul>{datos_integrantes.map(item=><li>{item.nombre}</li>)}</ul></li>
+           <li key="d1" className="subtitle">Dirección: {datos_domicilio.calle}</li>
+           <li key="d2" className="subtitle">Altura: {datos_domicilio.altura}</li>
+           <li key="d3" className="subtitle">Alquiler: {datos_domicilio.alquiler}</li>
+           <li key="d4" className="subtitle">integrantes: <ul>{datos_integrantes.map(item=><li key={item.id}>{item.nombre}</li>)}</ul></li>
            
            
 
@@ -122,9 +126,46 @@ is-offset-one-fifth my-5">
                 <td>{item.categoria}</td>
                 <td>${item.gasto}</td>
                 <td>{item.fecha}</td>
-                <td>
-                  <a href={`admin/modificarItem:${item.id}`}>edit</a></td>
-                <td><a href={`admin/eliminarItem:${item.id}`}>eliminar</a></td>
+                <td className="button is-info">
+                  <NavLink exact to={`modificarItem/${item.id}`}>edit</NavLink></td>
+                <td className="button is-danger"><a href={`eliminarItem:${item.id}`}>eliminar</a></td>
+               </tr>)}     
+               </tbody>
+             </table>
+              
+             
+            : <div className="notification is-success is-light is-text-centered"><p>No posee Gastos</p></div>
+           }
+           
+           
+           
+           
+
+          
+          
+        </article>
+      </div>
+      <div className="tile is-parent">
+      <article className="tile is-child notification is-info column ">
+          <p className="title">Servicios</p>
+          
+            {servicios ?
+             <table className="table">
+               <thead>
+                 <tr>
+                   <th title="nombre">Nombre</th>
+                   <th title="valor">Valor</th>
+                   
+                 </tr>
+               </thead>
+               <tbody>
+               {listServicios.map(item => <tr>
+                <td>{item.nombre}</td>
+                <td>${item.gasto}</td>
+                <td className="button is-link"><NavLink exact to="/pagar-servicios"></NavLink>Pagar</td>
+                <td  className="button is-info">
+                  <NavLink exact to={`modificarServicio/${item.id}`}>edit</NavLink></td>
+                <td  className="button is-danger"><a href={`eliminarItem:${item.id}`}>eliminar</a></td>
                </tr>)}     
                </tbody>
              </table>
@@ -153,11 +194,7 @@ is-offset-one-fifth my-5">
           <NavLink className="title" exact to ="/Agregar-Servicio">Agregar Servicio</NavLink>
         </article>
         </div>
-        <div className="tile is-parent">
-        <article className="tile is-child notification is-link column ">
-          <NavLink className="title" exact to ="/modificar-Servicio">Modificar Servicio</NavLink>
-        </article>
-        </div>
+        
       </div>
       </div>
      

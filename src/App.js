@@ -15,6 +15,8 @@ import AgregarCompra from "./pages/agregarCompra";
 import ModificarServicio from "./pages/modificarServicio";
 import AgregarServicio from "./pages/agregarServicio";
 import RegistroHogar from "./pages/registroHogar";
+import ModificarCompra from "./pages/modificarItem";
+
 
 
 function App() {
@@ -46,7 +48,10 @@ function App() {
     <Route path="/Agregar-Servicio" exact component ={
     AgregarServicio
   }/>
-    <Route path="/modificar-Servicio" exact component ={
+   <Route path="/modificarItem/:id" exact component ={
+    ModificarCompra
+  }/>
+    <Route path="/modificarServicio/:id" exact component ={
     ModificarServicio
   }/>
    <Route path="/registro" exact component ={
