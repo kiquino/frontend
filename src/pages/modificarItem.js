@@ -37,7 +37,7 @@ rellenarEspacios();
     return(<div >
     
         <div className="is-size-1 has-text-centered">
-            <h1 clas>Modificar Compra</h1>
+            <h1 className="title">Modificar Compra</h1>
     <div className="columns">
     <div className="column is-three-fifths is-offset-one-fifth">
             <div className="field">

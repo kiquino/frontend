@@ -23,7 +23,7 @@ nombre:nombre
     return(<div >
     
         <div className="is-size-1 has-text-centered">
-            <h1 clas>Agregar Servicio</h1>
+            <h1 className="title">Agregar Servicio</h1>
     <div className="columns">
     <div className="column is-three-fifths is-offset-one-fifth">
     <div className="field">

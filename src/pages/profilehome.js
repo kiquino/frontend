@@ -96,11 +96,11 @@ is-offset-one-fifth my-5">
       <div className="tile is-parent">
       <article className="tile is-child notification is-info column ">
           <p className="title">Domicilio</p>
-          <ul>
+          <ul className="menu">
            <li key="d1" className="subtitle">Dirección: {datos_domicilio.calle}</li>
            <li key="d2" className="subtitle">Altura: {datos_domicilio.altura}</li>
            <li key="d3" className="subtitle">Alquiler: {datos_domicilio.alquiler}</li>
-           <li key="d4" className="subtitle">integrantes: <ul>{datos_integrantes.map(item=><li key={item.id}>{item.nombre}</li>)}</ul></li>
+           <li key="d4" className="subtitle ">integrantes: <ul className="menu-list">{datos_integrantes.map(item=><li key={item.id}>{item.nombre}</li>)}</ul></li>
            
            
 
@@ -128,7 +128,7 @@ is-offset-one-fifth my-5">
                 <td>{item.fecha}</td>
                 <td className="button is-info">
                   <NavLink exact to={`modificarItem/${item.id}`}>edit</NavLink></td>
-                <td className="button is-danger"><a href={`eliminarItem:${item.id}`}>eliminar</a></td>
+                <td className="button is-danger"><NavLink exact to={`Eliminar-Gasto/${item.id}`}>eliminar</NavLink></td>
                </tr>)}     
                </tbody>
              </table>
@@ -165,7 +165,7 @@ is-offset-one-fifth my-5">
                 <td className="button is-link"><NavLink exact to="/pagar-servicios"></NavLink>Pagar</td>
                 <td  className="button is-info">
                   <NavLink exact to={`modificarServicio/${item.id}`}>edit</NavLink></td>
-                <td  className="button is-danger"><a href={`eliminarItem:${item.id}`}>eliminar</a></td>
+                <td  className="button is-danger"><NavLink exact to={`Eliminar-Servicio/${item.id}`}>eliminar</NavLink></td>
                </tr>)}     
                </tbody>
              </table>
@@ -183,7 +183,7 @@ is-offset-one-fifth my-5">
         </article>
       </div>
       </div>
-      <div className="column is-half">
+      <div className="column is-3">
         <div className="tile is-parent">
         <article className="tile is-child notification is-link column ">
           <NavLink className="title" exact to ="/Agregar-Compra">Agregar Compra</NavLink>

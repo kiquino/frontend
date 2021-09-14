@@ -51,7 +51,7 @@ const AgregarCompra = ()=>{
     return(<div >
     
         <div className="is-size-1 has-text-centered">
-            <h1 clas>Agregar Compra</h1>
+            <h1 className="title">Agregar Compra</h1>
     <div className="columns">
     <div className="column is-three-fifths is-offset-one-fifth">
             <div className="field">

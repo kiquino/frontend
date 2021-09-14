@@ -26,19 +26,19 @@ return(
     </div>
     <div className={`navbar-menu has-background-primary ${isActive ? "is-active":""}`}>
         <div className="navbar-start">
-            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/">Home</NavLink>
-            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/personal">Personal</NavLink>
-            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/domicilio">Domicilio</NavLink>
+            <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/">Home</NavLink>
+            <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/personal">Personal</NavLink>
+            <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/domicilio">Domicilio</NavLink>
         </div>
 
        
             {islogged ? 
                  <div className="navbar-end">
                      
-              <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/profilehome"><p>Bienvenido</p></NavLink>  
-            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/salir">Salir</NavLink></div> : <div className="navbar-end">
-             <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/login">Login</NavLink>
-            <NavLink className="navbar-item has-text-white" activeClassName="activo" exact to ="/registro">Registro</NavLink></div>}
+              <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/profilehome"><p>Bienvenido</p></NavLink>  
+            <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/salir">Salir</NavLink></div> : <div className="navbar-end">
+             <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/login">Login</NavLink>
+            <NavLink className="navbar-item has-text-black" activeClassName="activo" exact to ="/registro">Registro</NavLink></div>}
 
 
         
