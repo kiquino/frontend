@@ -2,11 +2,12 @@
 import React from "react";
 import Nav from "./components/layout/nav";
 import Header from './components/layout/header';
+import Footer from "./components/layout/footer";
 import 'bulma/css/bulma.min.css';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import homepage from './pages/homepage'
-import personal from './pages/personal'
-import domicilio from './pages/domicilio'
+import Personal from './pages/personal'
+import Domicilio from './pages/domicilio'
 import login from './pages/login'
 import Registro from './pages/registro'
 import Profilehome from "./pages/profilehome";
@@ -18,6 +19,7 @@ import RegistroHogar from "./pages/registroHogar";
 import ModificarCompra from "./pages/modificarItem";
 import EliminarServicio from "./pages/eliminarServicio";
 import EliminarCompra from "./pages/eliminarCompra";
+import Contacto from "./pages/contacto";
 
 function App() {
   return (
@@ -31,16 +33,19 @@ function App() {
     homepage
   }/>
    <Route path="/personal" exact component ={
-    personal
+    Personal
   }/>
    <Route path="/domicilio" exact component ={
-    domicilio
+    Domicilio
   }/>
    <Route path="/login" exact component ={
     login
   }/>
    <Route path="/salir" exact component ={
     salir
+  }/>
+   <Route path="/contacto/:id" exact component ={
+    Contacto
   }/>
     <Route path="/Agregar-Compra" exact component ={
     AgregarCompra
@@ -74,6 +79,7 @@ function App() {
   }/>
 </Switch>
 </Router>
+<Footer/>
      
    </div>
   );

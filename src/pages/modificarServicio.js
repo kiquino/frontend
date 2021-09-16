@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookies from "js-cookies";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router";
@@ -13,6 +14,11 @@ const ModificarServicio = ()=>{
     const Actualizar = async()=>{
         
         await axios.post(`http://localhost:3000/admin/profilebuilder/actualizarServicio/${id}`,{
+            
+                headers:{
+                  "x-access-token": jsCookies.getItem("token")
+                  
+                },
             gasto:gasto,
             nombre:nombre
         }).then((response)=>{
@@ -24,10 +30,17 @@ const ModificarServicio = ()=>{
     
     useEffect(()=>{
         const rellenarEspacios= async ()=>{
-            await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`)
+            await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`,{
+                headers:{
+                    "x-access-token": jsCookies.getItem("token")
+                   
+                  }
+            })
             .then((response)=>{
                 setNombre(response.data.nombre);
                 setGasto(response.data.gasto);
+                setMensaje(response.data.mensaje);
+                setError(response.data.error)
    
             }).catch((error)=>{
                 console.log(error)

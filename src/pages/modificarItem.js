@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookies from "js-cookies";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
@@ -15,6 +16,10 @@ const ModificarCompra =()=>{
     const Actualizar = async()=>{
         
     await axios.post(`http://localhost:3000/admin/compra/actualizar/${id}`,{
+        headers:{
+            "x-access-token": jsCookies.getItem("token"),
+            "id":id
+          },
         gasto:gasto,
         categoria:categoria
     }).then((response)=>{
@@ -23,7 +28,12 @@ const ModificarCompra =()=>{
     }
     useEffect(()=>{
         const rellenarEspacios= async ()=>{
-            await axios.get(`http://localhost:3000/admin/compra/modificar/${id}`)
+            await axios.get(`http://localhost:3000/admin/compra/modificar/${id}`,{
+                headers:{
+                    "x-access-token": jsCookies.getItem("token"),
+                    "id":id
+                  }
+            })
             .then((response)=>{
                 setCategoria(response.data.categoria);
                 setGasto(response.data.gasto);

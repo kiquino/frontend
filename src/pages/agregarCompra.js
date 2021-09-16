@@ -4,6 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import jsCookies from "js-cookies";
 
 const AgregarCompra = ()=>{
     const [gasto,setGasto]=useState("");
@@ -17,6 +18,10 @@ const AgregarCompra = ()=>{
 
         
         await axios.post("http://localhost:3000/admin/compra",{
+             headers:{
+            "x-access-token": jsCookies.getItem("token"),
+            
+          },
             id:Cookies.getItem("id_inquilino"),
             categoria:categoria,
             valor:gasto

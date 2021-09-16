@@ -1,15 +1,34 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Cookies from 'js-cookies';
+import { useEffect } from "react";
+import axios from "axios";
+import jsCookies from "js-cookies";
+import isAuth from "../../pages/profilehome"
 
 
 
 const Nav = () => {
     const [isActive, setActive] = useState(false);
-
+   
+    const [auth, setAuth]=useState(false);
+    const [islogged, setlogged] = useState(false)
     
-    const [islogged, setlogged] = useState(Boolean(Cookies.getItem("id_inquilino"))?true:false)
-  
+    useEffect(()=>{
+
+            const Auth =async()=>{
+await axios.get('http://localhost:3000/admin/autenticacion/validar',{
+    headers:{
+        "x-access-token": jsCookies.getItem("token"),
+      
+      }
+}).then((response)=>{
+    setlogged(response.data.auth);
+})
+            }
+            Auth();
+        
+    },[auth])
    
      
     

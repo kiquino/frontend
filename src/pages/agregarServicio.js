@@ -11,6 +11,10 @@ const[mensaje,setMensaje]=useState("");
 
 const Agregar= async()=>{
 await axios.post("http://localhost:3000/admin/profilebuilder/agregarServicio",{
+    headers:{
+        "x-access-token": jsCookies.getItem("token"),
+        
+      },
 id:jsCookies.getItem("id_inquilino"),
 gasto:gasto,
 nombre:nombre

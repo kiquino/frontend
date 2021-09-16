@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookies from "js-cookies";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router";
@@ -15,7 +16,12 @@ const EliminarCompra=()=>{
 
     useEffect(()=>{
         const traerData= async ()=>{
-            await axios.get(`http://localhost:3000/admin/compra/modificar/${id}`)
+            await axios.get(`http://localhost:3000/admin/compra/modificar/${id}`,{
+                headers:{
+                    "x-access-token": jsCookies.getItem("token"),
+                    
+                  }
+            })
             .then((response)=>{
                 setCategoria(response.data.categoria);
                 setGasto(response.data.gasto);
@@ -28,7 +34,12 @@ const EliminarCompra=()=>{
     },[]);
 
     const Eliminar= async()=>{
-  await axios.get(`http://localhost:3000/admin/profilebuilder/eliminarGasto/${id}`)
+  await axios.get(`http://localhost:3000/admin/profilebuilder/eliminarGasto/${id}`,{
+    headers:{
+        "x-access-token": jsCookies.getItem("token"),
+        "id":id
+      }
+  })
             .then((response)=>{
                 SetError(response.data.error);
                 setMensaje(response.data.mensaje);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookies from "js-cookies";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router";
@@ -14,7 +15,12 @@ const EliminarServicio=()=>{
 
    useEffect(()=>{
     const traerData= async ()=>{
-        await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`)
+        await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`,{
+            headers:{
+                "x-access-token": jsCookies.getItem("token"),
+                "id":id
+              }
+        })
         .then((response)=>{
             setNombre(response.data.nombre);
           
@@ -27,7 +33,12 @@ const EliminarServicio=()=>{
     traerData();
 },[]);
 const Eliminar= async()=>{
-    await axios.get(`http://localhost:3000/admin/profilebuilder/eliminarServicio/${id}`)
+    await axios.get(`http://localhost:3000/admin/profilebuilder/eliminarServicio/${id}`,{
+        headers:{
+            "x-access-token": jsCookies.getItem("token"),
+            "id":id
+          }
+    })
               .then((response)=>{
                   SetError(response.data.error);
                   setMensaje(response.data.mensaje);

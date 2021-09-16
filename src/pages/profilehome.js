@@ -100,7 +100,20 @@ is-offset-one-fifth my-5">
            <li key="d1" className="subtitle">Dirección: {datos_domicilio.calle}</li>
            <li key="d2" className="subtitle">Altura: {datos_domicilio.altura}</li>
            <li key="d3" className="subtitle">Alquiler: {datos_domicilio.alquiler}</li>
-           <li key="d4" className="subtitle ">integrantes: <ul className="menu-list">{datos_integrantes.map(item=><li key={item.id}>{item.nombre}</li>)}</ul></li>
+           <li key="d4" className="subtitle ">integrantes: <table className="table">
+             <thead>
+               <tr>
+                 <th title="nombre">Nombre</th>
+                 <th title="email">Email</th>
+               </tr>
+             </thead>
+             <tbody>
+             {datos_integrantes.map(item=><tr >
+               <td>{item.nombre}</td>
+               <td><NavLink exact to={`contacto/${item.id}`}>{item.email}</NavLink> </td>
+             </tr>)}
+             </tbody>
+             </table></li>
            
            
 
@@ -113,7 +126,7 @@ is-offset-one-fifth my-5">
           <p className="title">Gastos</p>
           
             {gastos ?
-             <table className="table">
+             <table className="table has-background-link-light">
                <thead>
                  <tr>
                    <th title="categoria">Categoria</th>

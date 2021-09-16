@@ -50,7 +50,7 @@ const RegistroHogar =()=>{
                        id="altura"
                        name="altura"
                        onChange={(e)=>{setAltura(e.target.value)}}
-                       placeholder="Apellido"/>
+                       placeholder="500-900"/>
                        <span className="icon is-small is-left"></span>
                    </div>
                </div>
