@@ -129,16 +129,16 @@ is-offset-one-fifth my-5">
              <table className="table has-background-link-light">
                <thead>
                  <tr>
-                   <th title="categoria">Categoria</th>
+                   <th title="nombre">Nombre</th>
                    <th title="valor">Valor</th>
                    <th title="fecha">Fecha</th>
                  </tr>
                </thead>
                <tbody>
                {datos_gastos.map(item => <tr>
-                <td>{item.categoria}</td>
-                <td>${item.gasto}</td>
-                <td>{item.fecha}</td>
+                <td>{item.nombre}</td>
+                <td>${item.valor}</td>
+                <td>{item.fecha = new Date().toDateString()}</td>
                 <td className="button is-info">
                   <NavLink exact to={`modificarItem/${item.id}`}>edit</NavLink></td>
                 <td className="button is-danger"><NavLink exact to={`Eliminar-Gasto/${item.id}`}>eliminar</NavLink></td>
@@ -174,7 +174,7 @@ is-offset-one-fifth my-5">
                <tbody>
                {listServicios.map(item => <tr>
                 <td>{item.nombre}</td>
-                <td>${item.gasto}</td>
+                <td>${item.valor}</td>
                 <td className="button is-link"><NavLink exact to="/pagar-servicios"></NavLink>Pagar</td>
                 <td  className="button is-info">
                   <NavLink exact to={`modificarServicio/${item.id}`}>edit</NavLink></td>
