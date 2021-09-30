@@ -10,7 +10,7 @@ const[error,setError]=useState(false);
 const[mensaje,setMensaje]=useState("");
 
 const Agregar= async()=>{
-await axios.post("http://localhost:3000/admin/profilebuilder/agregarServicio",{
+await axios.post(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/agregarServicio`,{
     headers:{
         "x-access-token": jsCookies.getItem("token"),
         

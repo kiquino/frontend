@@ -24,7 +24,7 @@ const Profilehome =() =>{
  useEffect(()=>{
   const builder = async ()=>{
     
-    await axios.get("http://localhost:3000/admin/profilebuilder",{
+    await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder`,{
       headers:{
         "x-access-token": Cookies.getItem("token"),
         "id":id

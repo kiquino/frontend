@@ -17,7 +17,7 @@ const AgregarCompra = ()=>{
     const registrarCompra = async()=>{
 
         
-        await axios.post("http://localhost:3000/admin/compra",{
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/compra`,{
              headers:{
             "x-access-token": jsCookies.getItem("token"),
             

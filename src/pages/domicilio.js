@@ -11,7 +11,7 @@ const Domicilio = () =>{
     const[datos_servicio,setDatosServicios]=useState([]);
     useEffect(()=>{
         const checkIfLogged= async()=>{
-            await axios.get('http://localhost:3000/admin/autenticacion/validar',{
+            await axios.get(`${process.env.REACT_APP_API_URL}/admin/autenticacion/validar`,{
                 headers:{
                     "x-access-token": jsCookies.getItem("token"),
                   
@@ -26,7 +26,7 @@ const Domicilio = () =>{
       useEffect(()=>{
       
             const traerDatos =async()=>{
-                await axios.get('http://localhost:3000/admin/profilebuilder',{
+                await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder`,{
                     headers:{
                         "x-access-token": jsCookies.getItem("token"),
                     "id":jsCookies.getItem("id_inquilino")

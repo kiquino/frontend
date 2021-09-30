@@ -13,7 +13,7 @@ const ModificarServicio = ()=>{
     const {id} = useParams();
     const Actualizar = async()=>{
         
-        await axios.post(`http://localhost:3000/admin/profilebuilder/actualizarServicio/${id}`,{
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/actualizarServicio/${id}`,{
             
                 headers:{
                   "x-access-token": jsCookies.getItem("token")

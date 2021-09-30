@@ -19,7 +19,7 @@ const [mensaje,setMensaje]=useState("");
 const [error,setError]=useState(false);
 const registrarse=()=>{
     // console.log(nombre,apellido,dni,password,calle,altura,email);
-    axios.post("http://localhost:3000/admin/registro",{
+    axios.post(`${process.env.REACT_APP_API_URL}/admin/registro`,{
         nombre:nombre,
         dni:dni,
         apellido:apellido,
