@@ -14,7 +14,7 @@ const Personal =()=>{
     
     useEffect(()=>{
         const checkIfLogged= async()=>{
-            await axios.get(`${process.env.REACT_APP_API_URL}admin/autenticacion/validar`,{
+            await axios.get(`${process.env.REACT_APP_API_URL}/admin/autenticacion/validar`,{
                 headers:{
                     "x-access-token": jsCookies.getItem("token"),
                   
