@@ -36,7 +36,7 @@ const AgregarCompra = ()=>{
     }
     useEffect(()=>{
         const checkAuth=()=>{
-            axios.post("https://localhost:3000/admin/autenticacion/validar",{
+            axios.post(`${process.env.REACT_APP_API_URL}/admin/autenticacion/validar`,{
                 headers:{
                     "x-access-token": Cookies.getItem("token")
                 }

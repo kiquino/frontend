@@ -28,7 +28,7 @@ const ModificarCompra =()=>{
     }
     useEffect(()=>{
         const rellenarEspacios= async ()=>{
-            await axios.get(`http://localhost:3000/admin/compra/modificar/${id}`,{
+            await axios.get(`${process.env.REACT_APP_API_URL}/admin/compra/modificar/${id}`,{
                 headers:{
                     "x-access-token": jsCookies.getItem("token"),
                     "id":id
