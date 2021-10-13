@@ -16,29 +16,66 @@ const AgregarCompra = ()=>{
     const [nombre, setNombre]=useState("")
     const[mensaje,setMensaje]=useState("");
     const [grupal,setGrupal] = useState(true);
+    const [isdisable,setIsdisable]=useState(false);
     const [integrantes,setIntegrantes]=useState([]);
+   
+    let array =[];
     
-    const registrarCompra = async()=>{
-
+    const registrarCompra = ()=>{
+        console.log(grupal)
+       if (grupal === false) {
+           
+        console.log(array + "integrantes")
+           setGasto(gasto/array.length);
+           array.forEach(element =>{
+            axios.post(`http://localhost:3000/admin/compra`,{
+                headers:{
+               "x-access-token": jsCookies.getItem("token"),
+               
+             },
+               id:element,
+               categoria:categoria,
+               valor:gasto,
+               nombre:nombre,
+               detalle:detalle
+               
+           }).then((response)=>{
+               
+               setMensaje(response.data.mensaje)
+           }).catch((response)=>{
+               setError(true);
+               setMensaje(response.data.mensaje)
+           }) 
+           })
+         
+       }
+       if(grupal === true){
         
-        await axios.post(`http://localhost:3000/admin/compra`,{
-             headers:{
-            "x-access-token": jsCookies.getItem("token"),
-            
-          },
-            id:jsCookies.getItem("id_inquilino"),
-            categoria:categoria,
-            valor:gasto,
-            nombre:nombre,
-            detalle:detalle
-            
-        }).then((response)=>{
-            
-            setMensaje(response.data.mensaje)
-        }).catch((response)=>{
-            setError(true);
-            setMensaje(response.data.mensaje)
-        })
+    
+        console.log(integrantes.length + "grupal" + " "+ gasto)
+           integrantes.forEach(element => {
+              
+             axios.post(`http://localhost:3000/admin/compra`,{
+                headers:{
+               "x-access-token": jsCookies.getItem("token"),
+               
+             },
+               id:element.id,
+               categoria:categoria,
+               valor:gasto/integrantes.length,
+               nombre:nombre,
+               detalle:detalle
+               
+           }).then((response)=>{
+               
+               setMensaje(response.data.mensaje)
+           }).catch((response)=>{
+               setError(true);
+               setMensaje(response.data.mensaje)
+           }) 
+           });
+       }
+        
     }
     useEffect(()=>{
         const ListaIntegrantes=()=>{
@@ -128,8 +165,17 @@ const AgregarCompra = ()=>{
     <h2>Seleccione grupal o personalizado</h2>
     <div className="is-flex is-flex-direction-row is-justify-content-space-between">
     <div className="control is-flex is-flex-direction-row">
-    <label className="radio">grupal</label>
-     <input className="radio" type="radio" name="radio" id="radio"></input>
+        <label className="radio"><input type="radio" name="gastos" onClick={(e)=>{
+             setGrupal(true);
+            setIsdisable(true);
+         }} />grupal</label>
+
+         <label className="radio"><input type="radio" name="gastos" onClick={(e)=>{
+             setGrupal(false);
+             setIsdisable(false);
+
+         }}/>personalizado</label>
+    
 
  
 </div>
@@ -137,9 +183,17 @@ const AgregarCompra = ()=>{
     {integrantes
     .map(integ =>
         <div> 
-            <label className="checkbox">{integ.nombre}</label>
+           <label className="checkbox" disabled={isdisable}><input id={integ.id} className="checkbox" type="checkbox" disabled={isdisable} value={integ.id} onClick={(e)=>{
+              if (e.target.checked) {
+                  array.push(integ.id)
+              }else{
+                var index = array.indexOf(e.target.value); 
+                  array.splice(index,1)
+              }
 
-        <input className="checkbox" type="checkbox" value={integ.id}></input>
+           }}/>{integ.nombre}</label>
+
+        
         </div>
           
            
