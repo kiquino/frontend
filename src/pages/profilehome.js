@@ -5,6 +5,7 @@ import Cookies from 'js-cookies';
 import { NavLink } from "react-router-dom";
 
 
+
 const Profilehome =() =>{
 
     const [isAuth, setAuth] = useState(false);
@@ -24,7 +25,7 @@ const Profilehome =() =>{
  useEffect(()=>{
   const builder = async ()=>{
     
-    await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder`,{
+    await axios.get(`http://localhost:3000/admin/profilebuilder`,{
       headers:{
         "x-access-token": Cookies.getItem("token"),
         "id":id
@@ -79,7 +80,7 @@ is-offset-one-fifth my-5">
   </div>
 </div>
 <div className="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-flex-start">
-<div className="column is-half">     
+<div className="column is-half width-auto">     
  <div className="tile is-parent">
       <article className="tile is-child notification is-info column ">
           <p className="title">Perfil</p>
@@ -138,7 +139,7 @@ is-offset-one-fifth my-5">
                {datos_gastos.map(item => <tr>
                 <td>{item.nombre}</td>
                 <td>${item.valor}</td>
-                <td>{item.fecha = new Date().toDateString()}</td>
+                <td>{item.fecha = new Date().toLocaleDateString()}</td>
                 <td className="button is-info">
                   <NavLink exact to={`modificarItem/${item.id}`}>edit</NavLink></td>
                 <td className="button is-danger"><NavLink exact to={`Eliminar-Gasto/${item.id}`}>eliminar</NavLink></td>

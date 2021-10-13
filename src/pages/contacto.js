@@ -13,7 +13,7 @@ const Contacto =()=>{
 
 useEffect(()=>{
     const traerData=async()=>{
-        await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/contacto/${id}`,{
+        await axios.get(`http://localhost:3000/admin/profilebuilder/contacto/${id}`,{
             headers:{
                 "x-access-token": jsCookies.getItem("token")
             }
@@ -26,7 +26,7 @@ useEffect(()=>{
 },[])
 const enviar= async()=>{
 setEmailstate("enviando");
-await axios.post(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/contacto`,{
+await axios.post(`http://localhost:3000/admin/profilebuilder/contacto`,{
     nombre:nombre,
     email:email,
     contenido:contenido

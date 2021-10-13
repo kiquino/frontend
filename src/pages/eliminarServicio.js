@@ -15,7 +15,7 @@ const EliminarServicio=()=>{
 
    useEffect(()=>{
     const traerData= async ()=>{
-        await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/modificarServicio/${id}`,{
+        await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`,{
             headers:{
                 "x-access-token": jsCookies.getItem("token"),
                 "id":id
@@ -33,7 +33,7 @@ const EliminarServicio=()=>{
     traerData();
 },[]);
 const Eliminar= async()=>{
-    await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/eliminarServicio/${id}`,{
+    await axios.get(`http://localhost:3000/admin/profilebuilder/eliminarServicio/${id}`,{
         headers:{
             "x-access-token": jsCookies.getItem("token"),
             "id":id

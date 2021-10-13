@@ -11,7 +11,7 @@ const Domicilio = () =>{
     const[datos_servicio,setDatosServicios]=useState([]);
     useEffect(()=>{
         const checkIfLogged= async()=>{
-            await axios.get(`${process.env.REACT_APP_API_URL}/admin/autenticacion/validar`,{
+            await axios.get(`http://localhost:3000/admin/autenticacion/validar`,{
                 headers:{
                     "x-access-token": jsCookies.getItem("token"),
                   
@@ -26,7 +26,7 @@ const Domicilio = () =>{
       useEffect(()=>{
       
             const traerDatos =async()=>{
-                await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder`,{
+                await axios.get(`http://localhost:3000/admin/profilebuilder`,{
                     headers:{
                         "x-access-token": jsCookies.getItem("token"),
                     "id":jsCookies.getItem("id_inquilino")
@@ -91,7 +91,7 @@ const Domicilio = () =>{
                <tbody>
                {datos_servicio.map(item => <tr>
                 <td>{item.nombre}</td>
-                <td>${item.gasto}</td>
+                <td>${item.valor}</td>
                 <td className="button is-link"><NavLink exact to="/pagar-servicios"></NavLink>Pagar</td>
                 <td  className="button is-info">
                   <NavLink exact to={`modificarServicio/${item.id}`}>edit</NavLink></td>

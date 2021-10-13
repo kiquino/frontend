@@ -17,7 +17,7 @@ const Nav = () => {
     useEffect(()=>{
 
             const Auth =async()=>{
-await axios.get(`${process.env.REACT_APP_API_URL}/admin/autenticacion/validar`,{
+await axios.get(`http://localhost:3000/admin/autenticacion/validar`,{
     headers:{
         "x-access-token": jsCookies.getItem("token"),
       

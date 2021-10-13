@@ -14,7 +14,7 @@ const Personal =()=>{
     
     useEffect(()=>{
         const checkIfLogged= async()=>{
-            await axios.get(`${process.env.REACT_APP_API_URL}/admin/autenticacion/validar`,{
+            await axios.get(`http://localhost:3000/admin/autenticacion/validar`,{
                 headers:{
                     "x-access-token": jsCookies.getItem("token"),
                   
@@ -28,7 +28,7 @@ const Personal =()=>{
     useEffect(()=>{
        
             const traerDatos =async()=>{
-                await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder`,{
+                await axios.get(`http://localhost:3000/admin/profilebuilder`,{
                     headers:{
                     "x-access-token": jsCookies.getItem("token"),
                     "id":jsCookies.getItem("id_inquilino")
@@ -43,7 +43,7 @@ const Personal =()=>{
 
             traerDatos();
         
-      },[logged])
+      },[0])
     return(<div>
         
 {logged ? <div className="container">
@@ -75,7 +75,7 @@ const Personal =()=>{
                 </div>
                 <div className="column is-6">
                 <div className="tile is-parent">
-      <article className="tile is-child notification is-info column ">
+      <article className="tile is-child notification is-info column is-flex is-flex-direction-column">
           <p className="title">Gastos</p>
           
             {gastos ?
@@ -89,9 +89,9 @@ const Personal =()=>{
                </thead>
                <tbody>
                {datos_gastos.map(item => <tr>
-                <td>{item.categoria}</td>
-                <td>${item.gasto}</td>
-                <td>{item.fecha}</td>
+                <td>{item.nombre}</td>
+                <td>${item.valor}</td>
+                <td>{item.fecha = new Date().toLocaleDateString()}</td>
                 <td className="button is-info">
                   <NavLink exact to={`modificarItem/${item.id}`}>edit</NavLink></td>
                 <td className="button is-danger"><NavLink exact to={`Eliminar-Gasto/${item.id}`}>eliminar</NavLink></td>

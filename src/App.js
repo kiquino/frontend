@@ -20,15 +20,22 @@ import ModificarCompra from "./pages/modificarItem";
 import EliminarServicio from "./pages/eliminarServicio";
 import EliminarCompra from "./pages/eliminarCompra";
 import Contacto from "./pages/contacto";
+import {Helmet} from "react-helmet";
 
 function App() {
   return (
    <div>
+ <Helmet>
+                <meta charSet="utf-8" />
+                <title>Gestor</title>
+                
+            </Helmet>
 <Router>
 
-<Nav/>
-<Header/>
+<Header/><Nav/>
 <Switch>
+
+
   <Route path="/" exact component ={
     homepage
   }/>

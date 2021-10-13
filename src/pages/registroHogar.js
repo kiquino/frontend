@@ -11,7 +11,7 @@ const RegistroHogar =()=>{
     const[error,setError]=useState(false);
     
     const IngresarRegistro = async()=>{
-        await axios.post(`${process.env.REACT_APP_API_URL}/admin/newdir`,{
+        await axios.post(`http://localhost:3000/admin/newdir`,{
             calle:calle,
             altura:altura,
             alquiler:alquiler

@@ -13,7 +13,7 @@ const ModificarServicio = ()=>{
     const {id} = useParams();
     const Actualizar = async()=>{
         
-        await axios.post(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/actualizarServicio/${id}`,{
+        await axios.post(`http://localhost:3000/admin/profilebuilder/actualizarServicio/${id}`,{
             
                 headers:{
                   "x-access-token": jsCookies.getItem("token")
@@ -30,7 +30,7 @@ const ModificarServicio = ()=>{
     
     useEffect(()=>{
         const rellenarEspacios= async ()=>{
-            await axios.get(`${process.env.REACT_APP_API_URL}/admin/profilebuilder/modificarServicio/${id}`,{
+            await axios.get(`http://localhost:3000/admin/profilebuilder/modificarServicio/${id}`,{
                 headers:{
                     "x-access-token": jsCookies.getItem("token")
                    

@@ -20,7 +20,7 @@ const Login = (props)=>{
 
 
     const login =()=>{
-        Axios.post(`${process.env.REACT_APP_API_URL}/admin/autenticacion`,{
+        Axios.post(`http://localhost:3000/admin/autenticacion`,{
             dni: dni,
             password:password
         }).then((response)=>{
